@@ -1,23 +1,20 @@
 package com.quasar.communication.api.model;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Valid
 public class StarshipData {
 
-	@NotNull(message = "name field can not be missing")
 	@JsonProperty("name")
-	String satelliteName;
+	private String satelliteName;
 	@NotNull(message = "distance field can not be missing")
 	@JsonProperty("distance")
-	Double distance;
+	private Double distance;
 	@NotNull(message = "message field can not be missing")
 	@JsonProperty("message")
-	String[] message;
-
+	private String[] message;
+	
 	public String getSatelliteName() {
 		return satelliteName;
 	}
@@ -30,7 +27,7 @@ public class StarshipData {
 		return distance;
 	}
 
-	public void setDistance(double distance) {
+	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
 

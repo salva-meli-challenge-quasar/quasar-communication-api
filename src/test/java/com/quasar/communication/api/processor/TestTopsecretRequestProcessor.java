@@ -28,7 +28,7 @@ class TestTopsecretRequestProcessor {
 	private RequestSender requestSender;
 
 	@InjectMocks
-	private TopsecretRequestProcessorImpl topsecretRequestProcessor;
+	private TopsecretUnifiedRequestProcessor topsecretRequestProcessor;
 
 
 	@Test

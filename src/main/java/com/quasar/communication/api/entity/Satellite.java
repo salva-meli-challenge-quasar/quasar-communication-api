@@ -1,6 +1,7 @@
 package com.quasar.communication.api.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.quasar.api.core.model.Point2D;
@@ -24,6 +26,8 @@ public class Satellite {
 	private String name;
 	@Embedded
 	private Point2D position;
+	@OneToMany(mappedBy="satellite")
+	private List<StarshipDataReceived> starshipDataReceived;
 	@Column(name = "date_created")
 	private LocalDateTime dateCreated;
 	@Column(name = "last_modification_date")
@@ -51,6 +55,14 @@ public class Satellite {
 
 	public void setPosition(Point2D position) {
 		this.position = position;
+	}
+	
+	public List<StarshipDataReceived> getStarshipDataReceived() {
+		return starshipDataReceived;
+	}
+
+	public void setStarshipDataReceived(List<StarshipDataReceived> starshipDataReceived) {
+		this.starshipDataReceived = starshipDataReceived;
 	}
 
 	public LocalDateTime getDateCreated() {

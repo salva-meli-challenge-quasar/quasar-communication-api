@@ -12,19 +12,18 @@ import com.quasar.communication.api.exception.MissingDataException;
 import com.quasar.communication.api.exception.NoSuchSatelliteException;
 import com.quasar.communication.api.model.TopsecretRequest;
 import com.quasar.communication.api.model.TopsecretResponse;
-
-import com.quasar.communication.api.processor.TopsecretRequestProcessor;
+import com.quasar.communication.api.processor.TopsecretUnifiedRequestProcessor;
 
 @RestController
 public class TopsecretController {
 
 	@Autowired
-	private TopsecretRequestProcessor topsecretRequestProcessor;
-
+	private TopsecretUnifiedRequestProcessor topsecretUnifiedRequestProcessor;
+	
 	@PostMapping(value = "/topsecret", consumes = "application/json", produces = "application/json")
 	public TopsecretResponse topsecret(@Valid @RequestBody TopsecretRequest topsecretRequest)
 			throws NoSuchSatelliteException, MissingDataException, JsonProcessingException {
-		return topsecretRequestProcessor.process(topsecretRequest);
+		return topsecretUnifiedRequestProcessor.process(topsecretRequest);
 	}
 	
 }
