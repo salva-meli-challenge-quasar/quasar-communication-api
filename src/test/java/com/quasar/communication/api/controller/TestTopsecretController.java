@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TestTopsecretController {
+class TestTopsecretController {
 
 	@Autowired
 	TopsecretController topsecretController;
@@ -29,6 +29,9 @@ public class TestTopsecretController {
 	@Value("classpath:/requests/validRequest.json")
 	Resource validRequestResource;
 
+	@Value("classpath:/requests/missingFieldRequest.json")
+	Resource missingFieldRequestResource;
+	
 	@Test
 	void testEmptyRequest() throws Exception {
 		String json = new String(Files.readAllBytes(this.emptyRequestResource.getFile().toPath()));
@@ -42,5 +45,12 @@ public class TestTopsecretController {
 		mockMvc.perform(MockMvcRequestBuilders.post("/topsecret").content(json).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+	}
+	
+	@Test
+	void testMissingFieldRequest() throws Exception {
+		String json = new String(Files.readAllBytes(this.missingFieldRequestResource.getFile().toPath()));
+		mockMvc.perform(MockMvcRequestBuilders.post("/topsecret").content(json).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 }

@@ -14,7 +14,7 @@ public class RequestSender {
 	public String send(String url, MediaType contentType, String body) {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(contentType);
-		HttpEntity<String> request = new HttpEntity<String>(body, httpHeaders);
+		HttpEntity<String> request = new HttpEntity<>(body, httpHeaders);
 		return new RestTemplateBuilder().errorHandler(new QuasarResponseErrorHandler()).build().postForObject(url,
 				request, String.class);
 	}
