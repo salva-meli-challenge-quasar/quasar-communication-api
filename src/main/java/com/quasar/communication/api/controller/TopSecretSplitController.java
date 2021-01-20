@@ -39,7 +39,7 @@ public class TopSecretSplitController {
 
 	@GetMapping(value = "/topsecret_split", produces = "application/json")
 	public TopsecretResponse topSecretSplitGetData()
-			throws JsonMappingException, JsonProcessingException, InsufficientAmountOfData {
+			throws JsonProcessingException, InsufficientAmountOfData {
 		return topsecretSplitRequestProcessor.process();
 	}
 }

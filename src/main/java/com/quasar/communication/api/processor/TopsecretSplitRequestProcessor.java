@@ -25,7 +25,7 @@ public class TopsecretSplitRequestProcessor extends TopsecretRequestProcessor {
 	@Autowired
 	private SatelliteRepository satelliteRepository;
 	
-	public TopsecretResponse process() throws JsonMappingException, JsonProcessingException, InsufficientAmountOfData {
+	public TopsecretResponse process() throws JsonProcessingException, InsufficientAmountOfData {
 		List<Satellite> satellites = satelliteRepository.findAll();
 		List<StarshipDataReceived> validData = getValidData(satellites);
 		if(validData.isEmpty()) {
@@ -41,7 +41,7 @@ public class TopsecretSplitRequestProcessor extends TopsecretRequestProcessor {
 	}
 
 	private void prepareRequestsData(List<StarshipDataReceived> validData, List<Point2D> points, double[] distances,
-			String[][] messages) throws JsonProcessingException, JsonMappingException {
+			String[][] messages) throws JsonProcessingException {
 		for(int index = 0; index < validData.size(); index ++) {
 			points.add(validData.get(index).getSatellite().getPosition());
 			distances[index] = validData.get(index).getDistance();

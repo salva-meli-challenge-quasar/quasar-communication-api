@@ -1,6 +1,7 @@
 package com.quasar.communication.api.manager;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,11 +41,11 @@ public class StarshipDataManager {
 	}
 
 	public void save(Map<Satellite, StarshipData> satelliteStarshipData)
-			throws NoSuchSatelliteException, JsonProcessingException {
-		for (Satellite satellite : satelliteStarshipData.keySet()) {
-			starshipDataReceivedRepository.save(starshipDataReceivedBuilder.withSatellite(satellite)
-					.withDistance(satelliteStarshipData.get(satellite).getDistance())
-					.withMessage(objectMapper.writeValueAsString(satelliteStarshipData.get(satellite).getMessage()))
+			throws JsonProcessingException {
+		for (Entry<Satellite, StarshipData> entry : satelliteStarshipData.entrySet()) {
+			starshipDataReceivedRepository.save(starshipDataReceivedBuilder.withSatellite(entry.getKey())
+					.withDistance(entry.getValue().getDistance())
+					.withMessage(objectMapper.writeValueAsString(entry.getValue().getMessage()))
 					.build());
 		}
 	}

@@ -47,7 +47,7 @@ public class TopsecretUnifiedRequestProcessor extends TopsecretRequestProcessor 
 
 	private Satellite processStarshipData(StarshipData starshipData, List<Point2D> points, double[] distances,
 			String[][] messages, int index)
-			throws MissingDataException, NoSuchSatelliteException, JsonProcessingException {
+			throws MissingDataException, NoSuchSatelliteException {
 		validateStarshipData(starshipData);
 		Satellite satellite = satelliteRepository.findByName(starshipData.getSatelliteName().toLowerCase());
 		if (satellite == null) {
