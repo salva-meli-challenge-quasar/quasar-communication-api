@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quasar.communication.api.exception.MissingDataException;
 import com.quasar.communication.api.exception.NoSuchSatelliteException;
 import com.quasar.communication.api.model.StarshipData;
@@ -27,8 +26,6 @@ class TestTopsecretRequestProcessor {
 	private SatelliteRepository satelliteRepository;
 	@Mock
 	private RequestSender requestSender;
-	@Mock
-	private ObjectMapper objectMapper;
 
 	@InjectMocks
 	private TopsecretRequestProcessorImpl topsecretRequestProcessor;
