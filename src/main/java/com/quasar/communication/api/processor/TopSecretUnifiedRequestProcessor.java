@@ -17,32 +17,29 @@ import com.quasar.communication.api.exception.MissingDataException;
 import com.quasar.communication.api.exception.NoSuchSatelliteException;
 import com.quasar.communication.api.manager.StarshipDataManager;
 import com.quasar.communication.api.model.StarshipData;
-import com.quasar.communication.api.model.TopsecretRequest;
-import com.quasar.communication.api.model.TopsecretResponse;
-import com.quasar.communication.api.repository.SatelliteRepository;
+import com.quasar.communication.api.model.TopSecretRequest;
+import com.quasar.communication.api.model.TopSecretResponse;
 
 @Service
-public class TopsSecretUnifiedRequestProcessor extends TopSecretRequestProcessor {
-
-	@Autowired
-	private SatelliteRepository satelliteRepository;
+public class TopSecretUnifiedRequestProcessor extends TopSecretRequestProcessor {
+	
 	@Autowired
 	private StarshipDataManager starshipDataManager;
 
-	public TopsecretResponse process(TopsecretRequest topsecretRequest)
+	public TopSecretResponse process(TopSecretRequest topSecretRequest)
 			throws NoSuchSatelliteException, JsonProcessingException, MissingDataException {
 		List<Point2D> points = new ArrayList<>();
-		double[] distances = new double[topsecretRequest.getStarshipData().size()];
-		String[][] messages = new String[topsecretRequest.getStarshipData().size()][];
+		double[] distances = new double[topSecretRequest.getStarshipData().size()];
+		String[][] messages = new String[topSecretRequest.getStarshipData().size()][];
 		Map<Satellite, StarshipData> satelliteStarshipData = new HashMap<>();
-		for (int index = 0; index < topsecretRequest.getStarshipData().size(); index++) {
-			satelliteStarshipData.put(processStarshipData(topsecretRequest.getStarshipData().get(index), points,
-					distances, messages, index), topsecretRequest.getStarshipData().get(index));
+		for (int index = 0; index < topSecretRequest.getStarshipData().size(); index++) {
+			satelliteStarshipData.put(processStarshipData(topSecretRequest.getStarshipData().get(index), points,
+					distances, messages, index), topSecretRequest.getStarshipData().get(index));
 		}
 		LocationResponse locationResponse = sendLocationRequest(points, distances);
 		MessageResponse messageResponse = sendMessageRequest(messages);
 		starshipDataManager.save(satelliteStarshipData);
-		return new TopsecretResponse(locationResponse.getLocation(), messageResponse.getMessage());
+		return new TopSecretResponse(locationResponse.getLocation(), messageResponse.getMessage());
 	}
 
 	private Satellite processStarshipData(StarshipData starshipData, List<Point2D> points, double[] distances,
@@ -60,7 +57,7 @@ public class TopsSecretUnifiedRequestProcessor extends TopSecretRequestProcessor
 		return satellite;
 	}
 
-	public void validateStarshipData(StarshipData starshipData) throws MissingDataException {
+	private void validateStarshipData(StarshipData starshipData) throws MissingDataException {
 		if (starshipData.getDistance() == null || starshipData.getMessage() == null
 				|| starshipData.getSatelliteName() == null || starshipData.getSatelliteName().trim().isEmpty()) {
 			throw new MissingDataException("There is missing data - check your request");

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TopsecretRequest {
+public class TopSecretRequest {
 
 	@NotNull(message = "satellites field can not be missing")
 	@NotEmpty(message = "satellites can not be empty")

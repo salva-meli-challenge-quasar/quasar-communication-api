@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.quasar.communication.api.exception.MissingDataException;
 import com.quasar.communication.api.exception.NoSuchSatelliteException;
 import com.quasar.communication.api.model.StarshipData;
-import com.quasar.communication.api.model.TopsecretRequest;
+import com.quasar.communication.api.model.TopSecretRequest;
 import com.quasar.communication.api.repository.SatelliteRepository;
 import com.quasar.communication.api.request.sender.RequestSender;
 
@@ -28,12 +28,12 @@ class TestTopSecretUnifiedRequestProcessor {
 	private RequestSender requestSender;
 
 	@InjectMocks
-	private TopsSecretUnifiedRequestProcessor topsecretRequestProcessor;
+	private TopSecretUnifiedRequestProcessor topsecretRequestProcessor;
 
 
 	@Test
 	void testNotValidSatelliteName() {
-		TopsecretRequest topsecretRequest = new TopsecretRequest();
+		TopSecretRequest topsecretRequest = new TopSecretRequest();
 		List<StarshipData> starshipData = new ArrayList<>();
 		StarshipData starship = new StarshipData();
 		starship.setSatelliteName("satellite");
@@ -49,7 +49,7 @@ class TestTopSecretUnifiedRequestProcessor {
 
 	@Test
 	void testEmptySatelliteName() {
-		TopsecretRequest topsecretRequest = new TopsecretRequest();
+		TopSecretRequest topsecretRequest = new TopSecretRequest();
 		List<StarshipData> starshipData = new ArrayList<>();
 		StarshipData starship = new StarshipData();
 		starship.setSatelliteName("");
@@ -64,7 +64,7 @@ class TestTopSecretUnifiedRequestProcessor {
 	
 	@Test
 	void testEmptySatelliteNameWithSpaces() {
-		TopsecretRequest topsecretRequest = new TopsecretRequest();
+		TopSecretRequest topsecretRequest = new TopSecretRequest();
 		List<StarshipData> starshipData = new ArrayList<>();
 		StarshipData starship = new StarshipData();
 		starship.setSatelliteName("        ");
@@ -79,7 +79,7 @@ class TestTopSecretUnifiedRequestProcessor {
 
 	@Test
 	void testMissingSatelliteNameField() {
-		TopsecretRequest topsecretRequest = new TopsecretRequest();
+		TopSecretRequest topsecretRequest = new TopSecretRequest();
 		List<StarshipData> starshipData = new ArrayList<>();
 		StarshipData starship = new StarshipData();
 		starship.setDistance(10.0);
@@ -93,7 +93,7 @@ class TestTopSecretUnifiedRequestProcessor {
 
 	@Test
 	void testMissingDistanceField() {
-		TopsecretRequest topsecretRequest = new TopsecretRequest();
+		TopSecretRequest topsecretRequest = new TopSecretRequest();
 		List<StarshipData> starshipData = new ArrayList<>();
 		StarshipData starship = new StarshipData();
 		starship.setSatelliteName("satellite");
@@ -107,7 +107,7 @@ class TestTopSecretUnifiedRequestProcessor {
 
 	@Test
 	void testMissingMessageField() {
-		TopsecretRequest topsecretRequest = new TopsecretRequest();
+		TopSecretRequest topsecretRequest = new TopSecretRequest();
 		List<StarshipData> starshipData = new ArrayList<>();
 		StarshipData starship = new StarshipData();
 		starship.setSatelliteName("satellite");

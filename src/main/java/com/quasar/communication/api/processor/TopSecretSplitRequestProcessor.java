@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +15,16 @@ import com.quasar.api.core.response.MessageResponse;
 import com.quasar.communication.api.entity.Satellite;
 import com.quasar.communication.api.entity.StarshipDataReceived;
 import com.quasar.communication.api.exception.InsufficientAmountOfData;
-import com.quasar.communication.api.model.TopsecretResponse;
-import com.quasar.communication.api.repository.SatelliteRepository;
+import com.quasar.communication.api.model.TopSecretRequest;
+import com.quasar.communication.api.model.TopSecretResponse;
 
 @Service
 public class TopSecretSplitRequestProcessor extends TopSecretRequestProcessor {
-
-	@Autowired
-	private SatelliteRepository satelliteRepository;
 	
 	@Value("${minutes.tolerance.valid.data}")
 	private int minutesTolerance;
 	
-	public TopsecretResponse process() throws JsonProcessingException, InsufficientAmountOfData {
+	public TopSecretResponse process(TopSecretRequest topSecretRequest) throws JsonProcessingException, InsufficientAmountOfData {
 		List<Satellite> satellites = satelliteRepository.findAll();
 		List<StarshipDataReceived> validData = getValidData(satellites);
 		if(validData.isEmpty()) {
@@ -40,7 +36,7 @@ public class TopSecretSplitRequestProcessor extends TopSecretRequestProcessor {
 		prepareRequestsData(validData, points, distances, messages);
 		LocationResponse locationResponse = sendLocationRequest(points, distances);
 		MessageResponse messageResponse = sendMessageRequest(messages);
-		return new TopsecretResponse(locationResponse.getLocation(), messageResponse.getMessage());
+		return new TopSecretResponse(locationResponse.getLocation(), messageResponse.getMessage());
 	}
 
 	private void prepareRequestsData(List<StarshipDataReceived> validData, List<Point2D> points, double[] distances,

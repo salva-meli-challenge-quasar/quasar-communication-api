@@ -1,6 +1,7 @@
 package com.quasar.communication.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,7 @@ import com.quasar.communication.api.exception.InsufficientAmountOfData;
 import com.quasar.communication.api.exception.NoSuchSatelliteException;
 import com.quasar.communication.api.manager.StarshipDataManager;
 import com.quasar.communication.api.model.StarshipData;
-import com.quasar.communication.api.model.TopsecretResponse;
+import com.quasar.communication.api.model.TopSecretResponse;
 import com.quasar.communication.api.processor.TopSecretSplitRequestProcessor;
 
 @RestController
@@ -26,7 +27,8 @@ public class TopSecretSplitController {
 	@Autowired
 	ObjectMapper objectMapper;
 	@Autowired
-	TopSecretSplitRequestProcessor topsecretSplitRequestProcessor;
+	@Qualifier("topSecretSplitRequestProcessor")
+	TopSecretSplitRequestProcessor topSecretRequestProcessor;
 
 	@PostMapping(value = "/topsecret_split/{satellite_name}", consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -37,8 +39,9 @@ public class TopSecretSplitController {
 	}
 
 	@GetMapping(value = "/topsecret_split", produces = "application/json")
-	public TopsecretResponse topSecretSplitGetData()
+	public TopSecretResponse topSecretSplitGetData()
 			throws JsonProcessingException, InsufficientAmountOfData {
-		return topsecretSplitRequestProcessor.process();
+		return topSecretRequestProcessor.process(null);
 	}
+	
 }
