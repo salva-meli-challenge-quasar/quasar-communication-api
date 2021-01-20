@@ -20,7 +20,7 @@ import com.quasar.communication.api.repository.SatelliteRepository;
 import com.quasar.communication.api.request.sender.RequestSender;
 
 @ExtendWith(MockitoExtension.class)
-class TestTopsecretRequestProcessor {
+class TestTopSecretUnifiedRequestProcessor {
 
 	@Mock
 	private SatelliteRepository satelliteRepository;
@@ -28,7 +28,7 @@ class TestTopsecretRequestProcessor {
 	private RequestSender requestSender;
 
 	@InjectMocks
-	private TopsecretRequestProcessorImpl topsecretRequestProcessor;
+	private TopsSecretUnifiedRequestProcessor topsecretRequestProcessor;
 
 
 	@Test
