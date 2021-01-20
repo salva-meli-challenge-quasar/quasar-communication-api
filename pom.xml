@@ -10,16 +10,16 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>meli.technical.challenge.quasar</groupId>
-	<artifactId>quasar.comunication.api</artifactId>
+	<artifactId>quasar.communication.api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>quasar-comunication-api</name>
+	<name>quasar-communication-api</name>
 	<description>Ricardo Salva - MELI technical challenge</description>
-	
+
 	<properties>
 		<java.version>1.8</java.version>
 		<sonarqube.scanner.version>3.8.0.2131</sonarqube.scanner.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -34,6 +34,31 @@
 			<groupId>meli.technical.challenge.quasar</groupId>
 			<artifactId>quasar.api.core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -76,21 +101,21 @@
 				</configuration>
 			</plugin>
 			<plugin>
-              <groupId>com.heroku.sdk</groupId>
-              <artifactId>heroku-maven-plugin</artifactId>
-              <version>2.0.3</version>
-              <configuration>
-                  <appName>salva-quasar-comunication-api</appName>
-                  <includeTarget>false</includeTarget>
-                  <includes>
-                      <include>${project.build.directory}/${project.build.finalName}.jar</include>
-                  </includes>
-                  <jdkVersion>${java.version}</jdkVersion>
-                  <processTypes>
-                      <web>java $JAVA_OPTS -jar ./target/${project.build.finalName}.jar</web>
-                  </processTypes>
-              </configuration>
-          </plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>2.0.3</version>
+				<configuration>
+					<appName>salva-quasar-communication-api</appName>
+					<includeTarget>false</includeTarget>
+					<includes>
+						<include>${project.build.directory}/${project.build.finalName}.jar</include>
+					</includes>
+					<jdkVersion>${java.version}</jdkVersion>
+					<processTypes>
+						<web>java $JAVA_OPTS -jar ./target/${project.build.finalName}.jar</web>
+					</processTypes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

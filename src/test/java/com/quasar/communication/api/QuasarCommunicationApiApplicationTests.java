@@ -1,10 +1,10 @@
-package com.quasar.comunication.api;
+package com.quasar.communication.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuasarComunicationApiApplicationTests {
+class QuasarCommunicationApiApplicationTests {
 
 	@Test
 	void contextLoads() {
