@@ -15,7 +15,7 @@ import com.quasar.communication.api.model.TopsecretResponse;
 import com.quasar.communication.api.processor.TopsecretRequestProcessor;
 
 @RestController
-public class TopSecretController {
+public class TopsecretController {
 
 	@Autowired
 	private TopsecretRequestProcessor topsecretRequestProcessor;

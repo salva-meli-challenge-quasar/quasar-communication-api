@@ -24,5 +24,5 @@ public class ValidateExceptionHandler {
 		});
 		return errors;
 	}
-	
+
 }

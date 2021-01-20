@@ -65,6 +65,7 @@ public class TopsecretRequestProcessor {
 
 	private LocationResponse sendLocationRequest(List<Point2D> points, double[] distances)
 			throws JsonProcessingException, JsonMappingException {
+		System.out.println(objectMapper.writeValueAsString(new LocationRequest(points, distances)));
 		return objectMapper.readValue(
 				requestSender.send(locationAPIUrl + locationAPIService, MediaType.APPLICATION_JSON,
 						objectMapper.writeValueAsString(new LocationRequest(points, distances))),
