@@ -25,7 +25,7 @@ import com.quasar.communication.api.repository.SatelliteRepository;
 import com.quasar.communication.api.request.sender.RequestSender;
 
 @Service
-public class TopsecretRequestProcessorImpl {
+public class TopsecretRequestProcessorImpl implements TopsecretRequestProcessor {
 
 	@Autowired
 	SatelliteRepository satelliteRepository;
