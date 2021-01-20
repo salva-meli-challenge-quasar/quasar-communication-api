@@ -31,7 +31,8 @@ class TestTopsecretRequestProcessor {
 	private ObjectMapper objectMapper;
 
 	@InjectMocks
-	private TopsecretRequestProcessor topsecretRequestProcessor;
+	private TopsecretRequestProcessorImpl topsecretRequestProcessor;
+
 
 	@Test
 	void testNotValidSatelliteName() {
