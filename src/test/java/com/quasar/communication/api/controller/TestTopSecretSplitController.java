@@ -26,7 +26,7 @@ import com.quasar.communication.api.repository.StarshipDataReceivedRepository;
 @SpringBootTest
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
-public class TestTopSecretSplitController {
+class TestTopSecretSplitController {
 
 	@Autowired
 	SatelliteRepository satelliteRepository;
