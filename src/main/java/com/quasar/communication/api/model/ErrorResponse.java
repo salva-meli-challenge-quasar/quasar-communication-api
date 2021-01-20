@@ -25,10 +25,6 @@ public class ErrorResponse {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
-	}
-
 	public int getStatus() {
 		return status;
 	}
