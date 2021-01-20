@@ -57,15 +57,14 @@ public class TopsecretRequestProcessor {
 	}
 
 	private MessageResponse sendMessageRequest(String[][] messages)
-			throws JsonProcessingException, JsonMappingException {
+			throws JsonProcessingException {
 		return objectMapper.readValue(requestSender.send(messageAPIUrl + messageAPIService,
 				MediaType.APPLICATION_JSON, objectMapper.writeValueAsString(new MessageRequest(messages))),
 				MessageResponse.class);
 	}
 
 	private LocationResponse sendLocationRequest(List<Point2D> points, double[] distances)
-			throws JsonProcessingException, JsonMappingException {
-		System.out.println(objectMapper.writeValueAsString(new LocationRequest(points, distances)));
+			throws JsonProcessingException {
 		return objectMapper.readValue(
 				requestSender.send(locationAPIUrl + locationAPIService, MediaType.APPLICATION_JSON,
 						objectMapper.writeValueAsString(new LocationRequest(points, distances))),

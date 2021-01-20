@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends RuntimeException {
 
-	private HttpStatus statusCode;
-	private String errorMessage;
+	private final HttpStatus statusCode;
+	private final String errorMessage;
 
 	public NotFoundException(HttpStatus statusCode, String errorMessage) {
 		super(errorMessage);
@@ -17,16 +17,8 @@ public class NotFoundException extends RuntimeException {
 		return statusCode;
 	}
 
-	public void setStatusCode(HttpStatus statusCode) {
-		this.statusCode = statusCode;
-	}
-
 	public String getErrorMessage() {
 		return errorMessage;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
 	}
 
 }
