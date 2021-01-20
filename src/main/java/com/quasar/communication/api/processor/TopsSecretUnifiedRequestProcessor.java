@@ -22,7 +22,7 @@ import com.quasar.communication.api.model.TopsecretResponse;
 import com.quasar.communication.api.repository.SatelliteRepository;
 
 @Service
-public class TopsecretUnifiedRequestProcessor extends TopsecretRequestProcessor {
+public class TopsSecretUnifiedRequestProcessor extends TopSecretRequestProcessor {
 
 	@Autowired
 	private SatelliteRepository satelliteRepository;

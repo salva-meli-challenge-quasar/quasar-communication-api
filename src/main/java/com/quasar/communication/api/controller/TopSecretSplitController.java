@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quasar.communication.api.exception.InsufficientAmountOfData;
 import com.quasar.communication.api.exception.NoSuchSatelliteException;
 import com.quasar.communication.api.manager.StarshipDataManager;
 import com.quasar.communication.api.model.StarshipData;
 import com.quasar.communication.api.model.TopsecretResponse;
-import com.quasar.communication.api.processor.TopsecretSplitRequestProcessor;
+import com.quasar.communication.api.processor.TopSecretSplitRequestProcessor;
 
 @RestController
 public class TopSecretSplitController {
@@ -27,7 +26,7 @@ public class TopSecretSplitController {
 	@Autowired
 	ObjectMapper objectMapper;
 	@Autowired
-	TopsecretSplitRequestProcessor topsecretSplitRequestProcessor;
+	TopSecretSplitRequestProcessor topsecretSplitRequestProcessor;
 
 	@PostMapping(value = "/topsecret_split/{satellite_name}", consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)

@@ -6,10 +6,10 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.quasar.api.core.model.Point2D;
 import com.quasar.api.core.response.LocationResponse;
 import com.quasar.api.core.response.MessageResponse;
@@ -20,10 +20,13 @@ import com.quasar.communication.api.model.TopsecretResponse;
 import com.quasar.communication.api.repository.SatelliteRepository;
 
 @Service
-public class TopsecretSplitRequestProcessor extends TopsecretRequestProcessor {
+public class TopSecretSplitRequestProcessor extends TopSecretRequestProcessor {
 
 	@Autowired
 	private SatelliteRepository satelliteRepository;
+	
+	@Value("${minutes.tolerance.valid.data}")
+	private int minutesTolerance;
 	
 	public TopsecretResponse process() throws JsonProcessingException, InsufficientAmountOfData {
 		List<Satellite> satellites = satelliteRepository.findAll();
@@ -54,7 +57,7 @@ public class TopsecretSplitRequestProcessor extends TopsecretRequestProcessor {
 		for (Satellite satellite : satellites) {
 			StarshipDataReceived starshipDataReceived = satellite.getStarshipDataReceived().stream()
 					.max(Comparator.comparing(StarshipDataReceived::getDateCreated)).orElse(null);
-			if(starshipDataReceived != null && starshipDataReceived.getDateCreated().isAfter(LocalDateTime.now().minusHours(1))) {
+			if(starshipDataReceived != null && starshipDataReceived.getDateCreated().isAfter(LocalDateTime.now().minusMinutes(1))) {
 			 validData.add(starshipDataReceived);
 			}
 		}

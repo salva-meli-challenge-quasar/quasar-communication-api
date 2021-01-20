@@ -15,7 +15,7 @@ import com.quasar.api.core.response.LocationResponse;
 import com.quasar.api.core.response.MessageResponse;
 import com.quasar.communication.api.request.sender.RequestSender;
 
-public abstract class TopsecretRequestProcessor {
+public abstract class TopSecretRequestProcessor {
 
 	@Autowired
 	private RequestSender requestSender;
