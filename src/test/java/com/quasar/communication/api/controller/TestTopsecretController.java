@@ -32,6 +32,9 @@ class TestTopsecretController {
 	@Value("classpath:/requests/missingFieldRequest.json")
 	Resource missingFieldRequestResource;
 	
+	@Value("classpath:/requests/noSolutionRequest.json")
+	Resource noSolutionRequestResource;
+	
 	@Test
 	void testEmptyRequest() throws Exception {
 		String json = new String(Files.readAllBytes(this.emptyRequestResource.getFile().toPath()));
@@ -49,8 +52,10 @@ class TestTopsecretController {
 	
 	@Test
 	void testMissingFieldRequest() throws Exception {
-		String json = new String(Files.readAllBytes(this.missingFieldRequestResource.getFile().toPath()));
+		String json = new String(Files.readAllBytes(this.noSolutionRequestResource.getFile().toPath()));
 		mockMvc.perform(MockMvcRequestBuilders.post("/topsecret").content(json).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+				.andExpect(MockMvcResultMatchers.status().isNotFound());
 	}
+	
+	
 }

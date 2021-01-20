@@ -15,24 +15,12 @@ public class TopsecretResponse {
 		this.message = message;
 	}
 	
-	public TopsecretResponse() {
-		
-	}
-	
 	public Point2D getPosition() {
 		return position;
 	}
 
-	public void setPosition(Point2D position) {
-		this.position = position;
-	}
-
 	public String getMessage() {
 		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 }
