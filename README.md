@@ -1,7 +1,7 @@
 # DESAFIO TÉCNICO - MELI
 ## Operación de fuego quasar
 
-## quasar-comunication-api
+## quasar-communication-api
 
 ## Objetivo
 Esta API tiene como fin brindar el servicio para obtener la posición y el mensaje que emite una nave estelar. 
