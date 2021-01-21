@@ -2,6 +2,8 @@ package com.quasar.communication.api.processor;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -38,17 +40,26 @@ public abstract class TopSecretRequestProcessor {
 	@Value("${message.api.service}")
 	protected String messageAPIService;
 
+	private static final Logger logger = LogManager.getLogger(TopSecretRequestProcessor.class);
+
 	protected MessageResponse sendMessageRequest(String[][] messages) throws JsonProcessingException {
-		return objectMapper.readValue(requestSender.send(messageAPIUrl + messageAPIService, MediaType.APPLICATION_JSON,
-				objectMapper.writeValueAsString(new MessageRequest(messages))), MessageResponse.class);
+		logger.debug("** Sending messageRequest **");
+		MessageResponse messageResponse = objectMapper.readValue(requestSender.send(messageAPIUrl + messageAPIService,
+				MediaType.APPLICATION_JSON, objectMapper.writeValueAsString(new MessageRequest(messages))),
+				MessageResponse.class);
+		logger.debug("** OK - messageResponse received **");
+		return messageResponse;
 	}
 
 	protected LocationResponse sendLocationRequest(List<Point2D> points, double[] distances)
 			throws JsonProcessingException {
-		return objectMapper.readValue(
+		logger.debug("** Sending locationRequest **");
+		LocationResponse locationResponse = objectMapper.readValue(
 				requestSender.send(locationAPIUrl + locationAPIService, MediaType.APPLICATION_JSON,
 						objectMapper.writeValueAsString(new LocationRequest(points, distances))),
 				LocationResponse.class);
+		logger.debug("** OK - locationResponse received **");
+		return locationResponse;
 	}
 
 	public abstract TopSecretResponse process(TopSecretRequest topSecretRequest)
