@@ -167,7 +167,7 @@ A modo de cierre, me gustaría compartir que cosas hubiese agregado o hecho de o
 - Investigar sobre Lombok (https://projectlombok.org/), al parecer es una herramienta que podría servir de mucho.
 - Mejorar la parametrización: para parametrizar las APIs se utiliza un archivo .properties en cada una. Sería mejor tener una, o más, tabla/s para poder parametrizar cada API de mejor manera.
 - Agregar testing de estres (quizás usando Artillery)
-- Agregar CLI (idealmente utilizando una imagen Docker)
+- Agregar CI (idealmente utilizando una imagen Docker)
 - Por último, y no por eso menos importante, realizar pruebas de aceptación con... ¡Han Solo!
 
 #### Autor: Ricardo Nicolás Salva.
