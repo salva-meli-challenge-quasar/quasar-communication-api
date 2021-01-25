@@ -15,7 +15,7 @@ import com.quasar.api.core.request.LocationRequest;
 import com.quasar.api.core.request.MessageRequest;
 import com.quasar.api.core.response.LocationResponse;
 import com.quasar.api.core.response.MessageResponse;
-import com.quasar.communication.api.exception.InsufficientAmountOfData;
+import com.quasar.communication.api.exception.InsufficientAmountOfDataException;
 import com.quasar.communication.api.exception.MissingDataException;
 import com.quasar.communication.api.exception.NoSuchSatelliteException;
 import com.quasar.communication.api.model.TopSecretRequest;
@@ -63,5 +63,5 @@ public abstract class TopSecretRequestProcessor {
 	}
 
 	public abstract TopSecretResponse process(TopSecretRequest topSecretRequest)
-			throws NoSuchSatelliteException, JsonProcessingException, MissingDataException, InsufficientAmountOfData;
+			throws NoSuchSatelliteException, JsonProcessingException, MissingDataException, InsufficientAmountOfDataException;
 }

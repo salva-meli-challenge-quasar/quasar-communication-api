@@ -16,7 +16,7 @@ import com.quasar.api.core.response.LocationResponse;
 import com.quasar.api.core.response.MessageResponse;
 import com.quasar.communication.api.entity.Satellite;
 import com.quasar.communication.api.entity.StarshipDataReceived;
-import com.quasar.communication.api.exception.InsufficientAmountOfData;
+import com.quasar.communication.api.exception.InsufficientAmountOfDataException;
 import com.quasar.communication.api.model.TopSecretRequest;
 import com.quasar.communication.api.model.TopSecretResponse;
 
@@ -29,13 +29,13 @@ public class TopSecretSplitRequestProcessor extends TopSecretRequestProcessor {
 	private static final Logger logger = LogManager.getLogger(TopSecretSplitRequestProcessor.class);
 
 	public TopSecretResponse process(TopSecretRequest topSecretRequest)
-			throws JsonProcessingException, InsufficientAmountOfData {
+			throws JsonProcessingException, InsufficientAmountOfDataException {
 		logger.info("**** Processing request ****");
 		List<Satellite> satellites = satelliteRepository.findAll();
 		List<StarshipDataReceived> validData = getValidData(satellites);
 		if (validData.isEmpty()) {
 			logger.error("---- Not enough data ----");
-			throw new InsufficientAmountOfData("The amount of data required is not enough");
+			throw new InsufficientAmountOfDataException("The amount of data required is not enough");
 		}
 		List<Point2D> points = new ArrayList<>();
 		double[] distances = new double[validData.size()];
@@ -61,7 +61,7 @@ public class TopSecretSplitRequestProcessor extends TopSecretRequestProcessor {
 			StarshipDataReceived starshipDataReceived = satellite.getStarshipDataReceived().stream()
 					.max(Comparator.comparing(StarshipDataReceived::getDateCreated)).orElse(null);
 			if (starshipDataReceived != null
-					&& starshipDataReceived.getDateCreated().isAfter(LocalDateTime.now().minusMinutes(1))) {
+					&& starshipDataReceived.getDateCreated().isAfter(LocalDateTime.now().minusMinutes(minutesTolerance))) {
 				logger.debug("** Valid data found - Satellite: {} - Created date: {} **",
 						starshipDataReceived.getSatellite().getName(), starshipDataReceived.getDateCreated());
 				validData.add(starshipDataReceived);

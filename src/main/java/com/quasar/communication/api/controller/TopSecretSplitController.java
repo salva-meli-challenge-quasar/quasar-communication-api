@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quasar.communication.api.exception.InsufficientAmountOfData;
+import com.quasar.communication.api.exception.InsufficientAmountOfDataException;
 import com.quasar.communication.api.exception.NoSuchSatelliteException;
 import com.quasar.communication.api.manager.StarshipDataManager;
 import com.quasar.communication.api.model.StarshipData;
@@ -40,7 +40,7 @@ public class TopSecretSplitController {
 
 	@GetMapping(value = "/topsecret_split", produces = "application/json")
 	public TopSecretResponse topSecretSplitGetData()
-			throws JsonProcessingException, InsufficientAmountOfData {
+			throws JsonProcessingException, InsufficientAmountOfDataException {
 		return topSecretRequestProcessor.process(null);
 	}
 	

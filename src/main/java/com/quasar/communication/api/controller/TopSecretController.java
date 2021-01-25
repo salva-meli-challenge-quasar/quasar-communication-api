@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.quasar.communication.api.exception.InsufficientAmountOfData;
+import com.quasar.communication.api.exception.InsufficientAmountOfDataException;
 import com.quasar.communication.api.exception.MissingDataException;
 import com.quasar.communication.api.exception.NoSuchSatelliteException;
 import com.quasar.communication.api.model.TopSecretRequest;
@@ -25,7 +25,7 @@ public class TopSecretController {
 
 	@PostMapping(value = "/topsecret", consumes = "application/json", produces = "application/json")
 	public TopSecretResponse topSecret(@Valid @RequestBody TopSecretRequest topsecretRequest)
-			throws NoSuchSatelliteException, MissingDataException, JsonProcessingException, InsufficientAmountOfData {
+			throws NoSuchSatelliteException, MissingDataException, JsonProcessingException, InsufficientAmountOfDataException {
 		return topSecretRequestProcessor.process(topsecretRequest);
 	}
 

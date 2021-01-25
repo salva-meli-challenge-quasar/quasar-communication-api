@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
-public class InsufficientAmountOfData extends Exception {
+public class InsufficientAmountOfDataException extends Exception {
 	
-	public InsufficientAmountOfData(String message) {
+	public InsufficientAmountOfDataException(String message) {
 		super(message);
 	}
 	
